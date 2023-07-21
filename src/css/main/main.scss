@@ -1,0 +1,175 @@
+@import "../cleaner/cleaner.scss";
+@import "../mixins/mixins.scss";
+@import "../variables/variables.scss";
+//---IMPORTS------------------------------------------------------------------------------------------------------
+html, body {
+    height: 100%;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+.header {
+    display: block;
+}
+.main {
+    display: block;
+    flex: 1 1 auto;
+}
+//---BASE---------------------------------------------------------------------------------------------------------
+* {
+    color: #ECEFF1;
+    box-sizing: border-box;
+}
+.wrapper {
+    width: 100vw;
+    padding: 0px 20px;
+
+    background-image: url("https://img.freepik.com/free-photo/3d-landscape-with-trees-silhouetted-against-sunset-sky_1048-18186.jpg?size=626&ext=jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: black;
+        opacity: 0.4;
+
+        animation-name: backgroundAnimation;
+        animation-duration: 2s;
+        animation-timing-function: ease;
+        animation-iteration-count: 1;
+    }
+}
+.content {
+    width: 100%;
+    position: relative;
+}
+.greet {
+    margin-bottom: calc(2rem + 4vw);
+}
+.greet__title {
+    padding-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: calc(2rem + 2.5vw);
+    @include loadAnimation(Animation_1, 0.5s, 1);
+}
+.greet__date {
+    text-align: center;
+    & > .date__time {
+        font-size: calc(1rem + 2.5vw);
+        margin-bottom: 10px;
+        @include loadAnimation(Animation_1, 0.8s, 1);
+    }
+    & > .date__day {
+        font-size: calc(0.5rem + 2.5vw);
+        @include loadAnimation(Animation_1, 1s, 1);
+    }
+}
+
+
+
+
+
+.navigation {
+    padding: calc(.2rem + 2vw) calc(.5rem + 3vw);
+    margin-right: auto;
+    margin-left: auto;
+    background-color: black;
+    opacity: 0.2;
+    border-radius: 20px;
+    width: 80%;
+    @include loadAnimation(Animation_1, 1.2s, 1);
+}
+.navigation__sections {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    @include loadAnimation(Animation_1, 1.5s, 1);
+}
+.navigation__links {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+    row-gap: 20px;
+    column-gap: 20px;
+    @include loadAnimation(Animation_1, 1.8s, 1);
+}
+@media(max-width: 1920px) {
+    .navigation__links {
+        grid-template-columns: repeat(3, minmax(100px, 1fr));
+    }
+}
+@media(max-width: 1440px) {
+    .navigation__links {
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+}
+@media(max-width: 920px) {
+    .navigation__links {
+        grid-template-columns: repeat(1, minmax(100px, 1fr));
+    }
+}
+.navigation__section-item {
+    &:not(:last-child) {
+        margin-right: 30px;
+    }
+    font-size: 50px;
+}
+.navigation__link-item {
+    width: 100%;
+    display: block;
+    color: black;
+    background-color: rgb(112, 112, 112);
+    border-radius: 10px;
+    padding: 10px;
+    & > a {
+        width: 100%;
+        display: block;
+        text-align: center;
+        font-size: 50px;
+        display: flex;
+        & > svg {
+            width: 60px;
+            height: 60px;
+            min-width: 30px;
+            min-height: 30px;
+            margin-right: 20px;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//---ANIMATIONS---------------------------------------------------------------------------------------------------
+@keyframes backgroundAnimation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.4;
+    }
+}
