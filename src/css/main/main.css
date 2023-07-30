@@ -87,18 +87,24 @@ html, body {
 
 * {
   color: #ECEFF1;
+  box-sizing: border-box;
 }
 
 .wrapper {
-  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+}
+
+.content {
+  width: 100%;
   padding: 0px 20px;
-  background-image: url("https://img.freepik.com/free-photo/3d-landscape-with-trees-silhouetted-against-sunset-sky_1048-18186.jpg?size=626&ext=jpg");
+  position: relative;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   position: relative;
 }
-.wrapper:before {
+.content:before {
   content: "";
   position: absolute;
   top: 0;
@@ -111,10 +117,17 @@ html, body {
   animation-timing-function: ease;
   animation-iteration-count: 1;
 }
-
-.content {
-  width: 100%;
-  position: relative;
+.content__morning {
+  background-image: url("https://img.freepik.com/free-photo/3d-landscape-with-trees-silhouetted-against-sunset-sky_1048-18186.jpg?size=626&ext=jpg");
+}
+.content__afternoon {
+  background-image: url("https://wallpapercave.com/wp/wp3386778.jpg");
+}
+.content__evening {
+  background-image: url("https://images.hdqwalls.com/download/new-york-city-evening-time-ak-1920x1080.jpg");
+}
+.content__night {
+  background-image: url("https://pure.wallpapergk.com/download/night_city_road_buildings_architecture-2560x1600.jpg");
 }
 
 .greet {
@@ -194,13 +207,14 @@ html, body {
 }
 
 .navigation {
-  padding: calc(0.2rem + 2vw) calc(0.5rem + 3vw);
+  width: 80%;
+  padding: calc(0.2rem + 2vw) calc(0.2rem + 3vw);
   margin-right: auto;
   margin-left: auto;
-  background-color: black;
-  opacity: 0.2;
+  margin-bottom: calc(0.2rem + 4vw);
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
   border-radius: 20px;
-  width: 80%;
   opacity: 0;
   position: relative;
   animation-name: Animation_1;
@@ -216,16 +230,15 @@ html, body {
     top: 50px;
   }
   100% {
-    opacity: 0.1;
+    opacity: 1;
     top: 0;
   }
 }
 
-.navigation__sections {
+.navigation__search-bar {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+  align-items: center;
   opacity: 0;
   position: relative;
   animation-name: Animation_1;
@@ -246,6 +259,79 @@ html, body {
   }
 }
 
+.search-bar__input {
+  width: 100%;
+  height: calc(0.5rem + 3vw);
+  min-height: 38px;
+  background-color: black;
+  border-radius: 3px;
+  padding: 3px 0px 3px 5px;
+  font-size: calc(0.2rem + 2vw);
+}
+
+@media (max-width: 720px) {
+  .search-bar__input {
+    font-size: 26px;
+  }
+}
+.search-bar__submit {
+  opacity: 0.6;
+  transition: 300ms all;
+}
+.search-bar__submit > svg {
+  font-size: calc(2rem + 5vw);
+}
+.search-bar__submit > svg > path {
+  color: rgb(69, 69, 69);
+}
+.search-bar__submit:hover {
+  transition: 300ms all;
+  opacity: 1;
+}
+.search-bar__submit:hover > svg {
+  transform: translateX(5px);
+}
+.search-bar__submit:active > svg > path {
+  transition: 300ms all;
+  color: rgb(26, 26, 26);
+  transform: scale(1.01);
+}
+
+.navigation__sections {
+  display: flex;
+  justify-content: space-between;
+  overflow-x: hidden;
+  margin-bottom: 20px;
+  opacity: 0;
+  position: relative;
+  animation-name: Animation_1;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-delay: 1.8s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+@keyframes Animation_1 {
+  0% {
+    opacity: 0;
+    top: 50px;
+  }
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}
+
+.navigation__section-item {
+  font-size: 30px;
+  background-color: black;
+  border-radius: 30px;
+  padding: 12px;
+}
+.navigation__section-item:not(:last-child) {
+  margin-right: 30px;
+}
+
 .navigation__links {
   display: grid;
   grid-template-columns: repeat(4, minmax(100px, 1fr));
@@ -257,7 +343,7 @@ html, body {
   animation-name: Animation_1;
   animation-duration: 1s;
   animation-iteration-count: 1;
-  animation-delay: 1.8s;
+  animation-delay: 2.1s;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
 }
@@ -287,34 +373,71 @@ html, body {
     grid-template-columns: repeat(1, minmax(100px, 1fr));
   }
 }
-.navigation__section-item {
-  font-size: 50px;
-}
-.navigation__section-item:not(:last-child) {
-  margin-right: 30px;
-}
-
 .navigation__link-item {
   width: 100%;
-  display: block;
-  color: black;
+  display: flex;
+  justify-content: space-between;
   background-color: rgb(112, 112, 112);
   border-radius: 10px;
   padding: 10px;
+  transition: 400ms all;
+  border: 2px solid transparent;
 }
-.navigation__link-item > a {
+.navigation__link-item > .delete {
+  position: relative;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  transition: 400ms all;
+}
+.navigation__link-item:hover {
+  position: relative;
+  left: 5px;
+  border: 2px solid rgb(69, 69, 69);
+  transition: 400ms all;
+}
+.navigation__link-item:hover .link-item__image {
+  fill: rgb(69, 69, 69);
+}
+.navigation__link-item:hover > .delete {
+  opacity: 1;
+  transition: 400ms all;
+}
+.navigation__link-item > .link {
   width: 100%;
   display: block;
   text-align: center;
   font-size: 50px;
   display: flex;
 }
-.navigation__link-item > a > svg {
+.navigation__link-item > .link > .link-item__text {
+  text-align: start;
+}
+.navigation__link-item > .link > .link-item__text > .title {
+  text-transform: uppercase;
+  font-size: 24px;
+}
+.navigation__link-item > .link > .link-item__text > .paragraph {
+  color: rgb(69, 69, 69);
+}
+.navigation__link-item .link-item__image {
   width: 60px;
   height: 60px;
   min-width: 30px;
   min-height: 30px;
   margin-right: 20px;
+}
+.navigation__link-item + .add-item {
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-size: 50px;
+  display: flex;
+}
+.navigation__link-item + .add-item > .link-item__image {
+  width: 54px;
+  height: 54px;
 }
 
 @keyframes backgroundAnimation {

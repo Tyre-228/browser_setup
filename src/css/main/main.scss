@@ -23,10 +23,13 @@ html, body {
     box-sizing: border-box;
 }
 .wrapper {
-    width: 100vw;
+    max-width: 100vw;
+    position: relative;
+}
+.content {
+    width: 100%;
     padding: 0px 20px;
-
-    background-image: url("https://img.freepik.com/free-photo/3d-landscape-with-trees-silhouetted-against-sunset-sky_1048-18186.jpg?size=626&ext=jpg");
+    position: relative;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -45,10 +48,18 @@ html, body {
         animation-timing-function: ease;
         animation-iteration-count: 1;
     }
-}
-.content {
-    width: 100%;
-    position: relative;
+    &__morning {
+        background-image: url("https://img.freepik.com/free-photo/3d-landscape-with-trees-silhouetted-against-sunset-sky_1048-18186.jpg?size=626&ext=jpg");
+    }
+    &__afternoon {
+        background-image: url("https://wallpapercave.com/wp/wp3386778.jpg");
+    }
+    &__evening {
+        background-image: url("https://images.hdqwalls.com/download/new-york-city-evening-time-ak-1920x1080.jpg");
+    }
+    &__night {
+        background-image: url("https://pure.wallpapergk.com/download/night_city_road_buildings_architecture-2560x1600.jpg");
+    }
 }
 .greet {
     margin-bottom: calc(2rem + 4vw);
@@ -78,28 +89,80 @@ html, body {
 
 
 .navigation {
-    padding: calc(.2rem + 2vw) calc(.5rem + 3vw);
+    width: 80%;
+    padding: calc(.2rem + 2vw) calc(.2rem + 3vw);
     margin-right: auto;
     margin-left: auto;
-    background-color: black;
-    opacity: 0.2;
+    margin-bottom: calc(.2rem + 4vw);
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
     border-radius: 20px;
-    width: 80%;
     @include loadAnimation(Animation_1, 1.2s, 1);
+}
+.navigation__search-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    @include loadAnimation(Animation_1, 1.5s, 1);
+}
+.search-bar__input {
+    width: 100%;
+    height: calc(0.5rem + 3vw);
+    min-height: 38px;
+    background-color: black;
+    border-radius: 3px;
+    padding: 3px 0px 3px 5px;
+    font-size: calc(0.2rem + 2vw);
+}
+@media(max-width: 720px) {
+    .search-bar__input {
+        font-size: 26px;
+    }
+}
+.search-bar__submit {
+    opacity: 0.6;
+    transition: 300ms all;
+    & > svg {
+        font-size: calc(2rem + 5vw);
+        & > path {
+            color: rgb(69, 69, 69);
+        }
+    }
+    &:hover {
+        transition: 300ms all;
+        opacity: 1;
+        & > svg {
+            transform: translateX(5px);
+        }
+    }
+    &:active  > svg > path {
+        transition: 300ms all;
+        color: rgb(26, 26, 26);
+        transform: scale(1.01);
+    }
 }
 .navigation__sections {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    overflow-x: hidden;
     margin-bottom: 20px;
-    @include loadAnimation(Animation_1, 1.5s, 1);
+    @include loadAnimation(Animation_1, 1.8s, 1);
+}
+.navigation__section-item {
+    &:not(:last-child) {
+        margin-right: 30px;
+    }
+    font-size: 30px;
+    background-color: black;
+    border-radius: 30px;
+    padding: 12px;
 }
 .navigation__links {
     display: grid;
     grid-template-columns: repeat(4, minmax(100px, 1fr));
     row-gap: 20px;
     column-gap: 20px;
-    @include loadAnimation(Animation_1, 1.8s, 1);
+    @include loadAnimation(Animation_1, 2.1s, 1);
 }
 @media(max-width: 1920px) {
     .navigation__links {
@@ -116,35 +179,72 @@ html, body {
         grid-template-columns: repeat(1, minmax(100px, 1fr));
     }
 }
-.navigation__section-item {
-    &:not(:last-child) {
-        margin-right: 30px;
-    }
-    font-size: 50px;
-}
 .navigation__link-item {
     width: 100%;
-    display: block;
-    color: black;
+    display: flex;
+    justify-content: space-between;
     background-color: rgb(112, 112, 112);
     border-radius: 10px;
     padding: 10px;
-    & > a {
+    transition: 400ms all;
+    border: 2px solid transparent;
+    & > .delete {
+        position: relative;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        opacity: 0;
+        transition: 400ms all;
+    }
+    &:hover {
+        position: relative;
+        left: 5px;
+        border: 2px solid rgb(69, 69, 69);
+        transition: 400ms all;
+        & .link-item__image {
+            fill: rgb(69, 69, 69);
+        }
+        & > .delete {
+            opacity: 1;
+            transition: 400ms all;
+        }
+    }
+    & > .link {
         width: 100%;
         display: block;
         text-align: center;
         font-size: 50px;
         display: flex;
-        & > svg {
-            width: 60px;
-            height: 60px;
-            min-width: 30px;
-            min-height: 30px;
-            margin-right: 20px;
+        & > .link-item__text {
+            text-align: start;
+            & > .title {
+                text-transform: uppercase;
+                font-size: 24px;
+            }
+            & > .paragraph {
+                color: rgb(69, 69, 69);
+            }
+        }
+    }
+    & .link-item__image {
+        width: 60px;
+        height: 60px;
+        min-width: 30px;
+        min-height: 30px;
+        margin-right: 20px;
+    }
+    & + .add-item {
+        width: 100%;
+        display: block;
+        text-align: center;
+        font-size: 50px;
+        display: flex;
+        & > .link-item__image {
+            width: 54px;
+            height: 54px;
         }
     }
 }
-
 
 
 

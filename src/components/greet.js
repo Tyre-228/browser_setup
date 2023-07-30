@@ -22,8 +22,8 @@ const Greet = () => {
                 }</span>
                 <br/>
                 <span className="date__day">
-                    {`${date.getDay() >= 10 ? date.getDay() : "0" + date.getDay()} /
-                    ${date.getMonth() >= 10 ? date.getMonth() : "0" + date.getMonth()} /
+                    {`${date.getDate() >= 10 ? date.getDate() : "0" + date.getDate()} /
+                    ${(date.getMonth() + 1) >= 10 ? (date.getMonth() + 1) : "0" + (date.getMonth() + 1)} /
                     ${date.getFullYear() >= 10 ? date.getFullYear() : "0" + date.getFullYear()}`}
                 </span>
             </div>
