@@ -49,7 +49,7 @@ html, body {
         animation-iteration-count: 1;
     }
     &__morning {
-        background-image: url("https://img.freepik.com/free-photo/3d-landscape-with-trees-silhouetted-against-sunset-sky_1048-18186.jpg?size=626&ext=jpg");
+        background-image: url("https://i.pinimg.com/originals/7b/36/59/7b365916db77a49453cd883b548a9e26.jpg");
     }
     &__afternoon {
         background-image: url("https://wallpapercave.com/wp/wp3386778.jpg");
@@ -157,7 +157,7 @@ html, body {
     border-radius: 30px;
     padding: 12px;
 }
-.navigation__links {
+.bookmark-list {
     display: grid;
     grid-template-columns: repeat(4, minmax(100px, 1fr));
     row-gap: 20px;
@@ -165,21 +165,21 @@ html, body {
     @include loadAnimation(Animation_1, 2.1s, 1);
 }
 @media(max-width: 1920px) {
-    .navigation__links {
+    .bookmark-list {
         grid-template-columns: repeat(3, minmax(100px, 1fr));
     }
 }
 @media(max-width: 1440px) {
-    .navigation__links {
+    .bookmark-list {
         grid-template-columns: repeat(2, minmax(100px, 1fr));
     }
 }
 @media(max-width: 920px) {
-    .navigation__links {
+    .bookmark-list {
         grid-template-columns: repeat(1, minmax(100px, 1fr));
     }
 }
-.navigation__link-item {
+.bookmark {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -201,7 +201,7 @@ html, body {
         left: 5px;
         border: 2px solid rgb(69, 69, 69);
         transition: 400ms all;
-        & .link-item__image {
+        & .bookmark__image {
             fill: rgb(69, 69, 69);
         }
         & > .delete {
@@ -215,7 +215,7 @@ html, body {
         text-align: center;
         font-size: 50px;
         display: flex;
-        & > .link-item__text {
+        & > .bookmark__text {
             text-align: start;
             & > .title {
                 text-transform: uppercase;
@@ -226,7 +226,7 @@ html, body {
             }
         }
     }
-    & .link-item__image {
+    & .bookmark__image {
         width: 60px;
         height: 60px;
         min-width: 30px;
@@ -248,6 +248,77 @@ html, body {
 
 
 
+
+.content__add-bookmark-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        opacity: 0.3;
+        z-index: 998;
+    }
+}
+.add-bookmark-page__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    position: absolute;
+    width: 80vw;
+    height: fit-content;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}
+.add-bookmark-page__wrapper {
+    background-color:rgb(112, 112, 112);
+}
+.add-bookmark-page__content {
+}
+.add-bookmark-page__close {
+    svg {
+        width: 40px;
+        height: 40px;
+        path {
+            color: black;
+        }
+    }
+}
+.add-bookmark-page__title {
+    color: black;
+}
+.add-bookmark-page__form {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    .input {
+        background-color: black;
+        &:not(:last-child) {
+            margin-bottom: 5px;
+        }
+    }
+}
+.add-bookmark-page__button {
+    background-color: black;
+    border-radius: 5px;
+    padding: 3px;
+}
 
 
 

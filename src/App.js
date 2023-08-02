@@ -1,27 +1,49 @@
 import React, { useState, useEffect } from "react";
+
 import Greet from "./components/greet";
 import Navigator from "./components/navigator";
+import addLinkUI from "./components/addBookmarkUI";
 import "./css/main/main.css"
+import AddLinkUI from "./components/addBookmarkUI";
+
+import AddBookmarkContext from "./contexts/addBookmarkContext";
 
 function App() {
   const [className, setClassName] = useState("content")
+  const [addBookmarkUIState, setAddBookmarkUIState] = useState(false)
+
+  const addBookmarkClickHandler = () => {
+    setAddBookmarkUIState(true)
+  }
+  const closeAddBookmarkUI = () => {
+    setAddBookmarkUIState(false)
+  }
+
   useEffect(() => {
     const hours = (new Date).getHours()
-    if(hours >= 6 && hours < 12) {
-      setClassName("content content__morning")
-    } else if(hours >= 12 && hours < 18) {
-      setClassName("content content__afternoon")
-    } else if(hours >= 18 && hours < 23) {
-      setClassName("content content__evening")
-    } else {
-      setClassName("content content__night")
+
+    switch (true) {
+      case hours >=6 && hours < 12:
+        setClassName("content content__morning")
+        break
+      case hours >= 12 && hours < 18:
+        setClassName("content content__afternoon")
+        break
+      case hours >= 18 && hours < 23:
+        setClassName("content content__evening")
+        break
+      default:
+        setClassName("content content__night")
     }
   }, [(new Date).getHours()])
   return (
-    <div className={className}>
-      <Greet />
-      <Navigator />
-    </div>
+      <AddBookmarkContext.Provider value={addBookmarkClickHandler}>
+        <div className={className}>
+          <AddLinkUI clickHandler={closeAddBookmarkUI} active={addBookmarkUIState} />
+          <Greet />
+          <Navigator />
+        </div>
+      </AddBookmarkContext.Provider>
   );
 }
 

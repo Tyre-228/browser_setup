@@ -118,7 +118,7 @@ html, body {
   animation-iteration-count: 1;
 }
 .content__morning {
-  background-image: url("https://img.freepik.com/free-photo/3d-landscape-with-trees-silhouetted-against-sunset-sky_1048-18186.jpg?size=626&ext=jpg");
+  background-image: url("https://i.pinimg.com/originals/7b/36/59/7b365916db77a49453cd883b548a9e26.jpg");
 }
 .content__afternoon {
   background-image: url("https://wallpapercave.com/wp/wp3386778.jpg");
@@ -332,7 +332,7 @@ html, body {
   margin-right: 30px;
 }
 
-.navigation__links {
+.bookmark-list {
   display: grid;
   grid-template-columns: repeat(4, minmax(100px, 1fr));
   row-gap: 20px;
@@ -359,21 +359,21 @@ html, body {
 }
 
 @media (max-width: 1920px) {
-  .navigation__links {
+  .bookmark-list {
     grid-template-columns: repeat(3, minmax(100px, 1fr));
   }
 }
 @media (max-width: 1440px) {
-  .navigation__links {
+  .bookmark-list {
     grid-template-columns: repeat(2, minmax(100px, 1fr));
   }
 }
 @media (max-width: 920px) {
-  .navigation__links {
+  .bookmark-list {
     grid-template-columns: repeat(1, minmax(100px, 1fr));
   }
 }
-.navigation__link-item {
+.bookmark {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -383,7 +383,7 @@ html, body {
   transition: 400ms all;
   border: 2px solid transparent;
 }
-.navigation__link-item > .delete {
+.bookmark > .delete {
   position: relative;
   top: 0;
   width: 40px;
@@ -391,53 +391,127 @@ html, body {
   opacity: 0;
   transition: 400ms all;
 }
-.navigation__link-item:hover {
+.bookmark:hover {
   position: relative;
   left: 5px;
   border: 2px solid rgb(69, 69, 69);
   transition: 400ms all;
 }
-.navigation__link-item:hover .link-item__image {
+.bookmark:hover .bookmark__image {
   fill: rgb(69, 69, 69);
 }
-.navigation__link-item:hover > .delete {
+.bookmark:hover > .delete {
   opacity: 1;
   transition: 400ms all;
 }
-.navigation__link-item > .link {
+.bookmark > .link {
   width: 100%;
   display: block;
   text-align: center;
   font-size: 50px;
   display: flex;
 }
-.navigation__link-item > .link > .link-item__text {
+.bookmark > .link > .bookmark__text {
   text-align: start;
 }
-.navigation__link-item > .link > .link-item__text > .title {
+.bookmark > .link > .bookmark__text > .title {
   text-transform: uppercase;
   font-size: 24px;
 }
-.navigation__link-item > .link > .link-item__text > .paragraph {
+.bookmark > .link > .bookmark__text > .paragraph {
   color: rgb(69, 69, 69);
 }
-.navigation__link-item .link-item__image {
+.bookmark .bookmark__image {
   width: 60px;
   height: 60px;
   min-width: 30px;
   min-height: 30px;
   margin-right: 20px;
 }
-.navigation__link-item + .add-item {
+.bookmark + .add-item {
   width: 100%;
   display: block;
   text-align: center;
   font-size: 50px;
   display: flex;
 }
-.navigation__link-item + .add-item > .link-item__image {
+.bookmark + .add-item > .link-item__image {
   width: 54px;
   height: 54px;
+}
+
+.content__add-bookmark-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content__add-bookmark-page:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.3;
+  z-index: 998;
+}
+
+.add-bookmark-page__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  position: absolute;
+  width: 80vw;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+
+.add-bookmark-page__wrapper {
+  background-color: rgb(112, 112, 112);
+}
+
+.add-bookmark-page__close svg {
+  width: 40px;
+  height: 40px;
+}
+.add-bookmark-page__close svg path {
+  color: black;
+}
+
+.add-bookmark-page__title {
+  color: black;
+}
+
+.add-bookmark-page__form {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.add-bookmark-page__form .input {
+  background-color: black;
+}
+.add-bookmark-page__form .input:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.add-bookmark-page__button {
+  background-color: black;
+  border-radius: 5px;
+  padding: 3px;
 }
 
 @keyframes backgroundAnimation {
