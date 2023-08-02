@@ -36,6 +36,11 @@ function App() {
         setClassName("content content__night")
     }
   }, [(new Date).getHours()])
+  useEffect(() => {
+    if(!localStorage.getItem("bookmarkData")) {
+      localStorage.setItem("bookmarkData", JSON.stringify([]))
+    }
+  }, [])
   return (
       <AddBookmarkContext.Provider value={addBookmarkClickHandler}>
         <div className={className}>
