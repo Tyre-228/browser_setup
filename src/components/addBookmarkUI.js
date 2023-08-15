@@ -11,6 +11,7 @@ const AddBookmarkUI = (props) => {
                 id: index,
                 name: pageName,
                 link: pageLink,
+                section: props.currentSection,
             }
             const newData = [...JSON.parse(localStorage.getItem("bookmarkData")), inputData]
             localStorage.setItem("bookmarkData", JSON.stringify(newData))

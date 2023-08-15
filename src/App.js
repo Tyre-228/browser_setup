@@ -2,21 +2,29 @@ import React, { useState, useEffect } from "react";
 
 import Greet from "./components/greet";
 import Navigator from "./components/navigator";
-import addLinkUI from "./components/addBookmarkUI";
-import "./css/main/main.css"
-import AddLinkUI from "./components/addBookmarkUI";
+import AddBookmarkUI from "./components/addBookmarkUI";
 
 import AddBookmarkContext from "./contexts/addBookmarkContext";
+import "./css/main/main.css"
 
 function App() {
   const [className, setClassName] = useState("content")
   const [addBookmarkUIState, setAddBookmarkUIState] = useState(false)
+  const [currentSection, setCurrentSection] = useState("")
+  
 
   const addBookmarkClickHandler = () => {
     setAddBookmarkUIState(true)
   }
   const closeAddBookmarkUI = () => {
     setAddBookmarkUIState(false)
+  }
+  const getCurrentSection = (section) => {
+    setCurrentSection(section)
+  }
+  const getBookmarkData = (currentSection) => {
+    let data = JSON.parse(localStorage.getItem("bookmarkData")) || []
+    return data.filter(elem => elem.section === currentSection ? true : false)
   }
 
   useEffect(() => {
@@ -36,17 +44,22 @@ function App() {
         setClassName("content content__night")
     }
   }, [(new Date).getHours()])
+
   useEffect(() => {
     if(!localStorage.getItem("bookmarkData")) {
       localStorage.setItem("bookmarkData", JSON.stringify([]))
     }
+    if(!localStorage.getItem("sectionData")) {
+      localStorage.setItem("sectionData", JSON.stringify(["Default"]))
+    }
   }, [])
+
   return (
       <AddBookmarkContext.Provider value={addBookmarkClickHandler}>
         <div className={className}>
-          <AddLinkUI clickHandler={closeAddBookmarkUI} active={addBookmarkUIState} />
+          <AddBookmarkUI clickHandler={closeAddBookmarkUI} currentSection={currentSection} active={addBookmarkUIState} />
           <Greet />
-          <Navigator />
+          <Navigator getBookmarkData={getBookmarkData} getCurrentSection={getCurrentSection} />
         </div>
       </AddBookmarkContext.Provider>
   );
