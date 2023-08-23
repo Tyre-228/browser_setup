@@ -7,7 +7,7 @@ const Greet = () => {
     }, 1000)
 
     return (
-        <div className="greet">
+        <div className="header__greet greet">
             <h1 className="greet__title">
                 {date.getHours() >= 6 && date.getHours() < 12 ? "Good morning" : 
                 date.getHours() >= 12 && date.getHours() < 18 ? "Good afternoon" : 

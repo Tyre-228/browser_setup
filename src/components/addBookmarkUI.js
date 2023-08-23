@@ -4,6 +4,7 @@ import { RxCross1 } from "react-icons/rx"
 const AddBookmarkUI = (props) => {
     const [pageName, setPageName] = useState("")
     const [pageLink, setPageLink] = useState("")
+    
     const submitHandler = () => {
         if(pageName !== "" && (/https?:\/\/([^/]+)\//).test(pageLink)) {
             const index = JSON.parse(localStorage.getItem("bookmarkData")).length
@@ -35,7 +36,7 @@ const AddBookmarkUI = (props) => {
                     </form>
                     <button onClick={submitHandler} className="add-bookmark-page__button">Add page</button>
                 </div>
-                <button className="add-bookmark-page__close" onClick={props.clickHandler}><RxCross1/></button>
+                <button className="add-bookmark-page__close" onClick={props.closePage}><RxCross1/></button>
             </div>
         </section>
     )

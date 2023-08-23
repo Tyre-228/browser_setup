@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+
 import Bookmark from "./bookmark";
 import AddBookmark from "./addBookmark";
-import { BsFillFolderSymlinkFill } from "react-icons/bs";
 import SearchBar from "./searchBar";
 import NavigationSection from "./navigationSection";
+import AddSection from "./addSection";
+
+import { BsFillFolderSymlinkFill } from "react-icons/bs";
 
 const Navigator = (props) => {
     const [bookmarkData, setBookmarkData] = useState([])
@@ -13,19 +16,43 @@ const Navigator = (props) => {
     const changeCurrentSection = (section) => {
         setCurrentSection(section)
     }
+    const deleteSection = (section) => {
+        let sectionData = JSON.parse(localStorage.getItem("sectionData"))
+        const sectionIndex = sectionData.findIndex(elem => elem === section)
+        sectionData.splice(sectionIndex, 1)
+        localStorage.setItem("sectionData", JSON.stringify(sectionData))
+
+        setSectionData(sectionData)
+        setCurrentSection(JSON.parse(localStorage.getItem("sectionData"))[0])
+        console.log(JSON.parse(localStorage.getItem("sectionData"))[0])
+
+        const bookmarkArray = JSON.parse(localStorage.getItem("bookmarkData"))
+        const newBookmarArray = bookmarkArray.filter(elem => elem.section !== section)
+        localStorage.setItem("bookmarkData", JSON.stringify(newBookmarArray))
+    }
 
     const bookmarkClickHandler = (event) => {
-        const data = JSON.parse(localStorage.getItem("bookmarkData"))
-        data.splice(event.currentTarget.getAttribute("id"), 1)
+        let data = JSON.parse(localStorage.getItem("bookmarkData"))
+        let elemId = +event.currentTarget.getAttribute("id")
+        let index = data.findIndex(elem => elem.id === elemId)
+
+        if(index !== -1) {
+            data.splice(index, 1)
+        }
         localStorage.setItem("bookmarkData", JSON.stringify(data))
 
         setBookmarkData(props.getBookmarkData(currentSection))
     }
-    useEffect(() => {
+    const updateData = () => {
         setSectionData(JSON.parse(localStorage.getItem("sectionData")) || ["Default"])
         setCurrentSection(currentSection || JSON.parse(localStorage.getItem("sectionData"))[0] || ["Default"])
-        setBookmarkData(props.getBookmarkData(currentSection))
         props.getCurrentSection(currentSection)
+        console.log(currentSection)
+        setBookmarkData(props.getBookmarkData(currentSection))
+    }
+    useEffect(() => {
+        console.log(currentSection)
+        updateData()
     }, [currentSection])
 
     return (
@@ -33,9 +60,9 @@ const Navigator = (props) => {
             <SearchBar />
             <ul className="navigation__sections">
                 {sectionData.map((elem, index) => {
-                    return (<NavigationSection changeCurrentSection={changeCurrentSection} currentSection={currentSection || JSON.parse(localStorage.getItem("sectionData"))[0]} key={index} name={elem} />)
+                    return (<NavigationSection deleteSection={deleteSection} changeCurrentSection={changeCurrentSection} currentSection={currentSection || JSON.parse(localStorage.getItem("sectionData"))[0]} key={index} name={elem} />)
                 })}
-                <li className="navigation__section-item navigation__add-item">+</li>
+                <AddSection/>
             </ul>
             <ul className="navigation__bookmark-list bookmark-list">
                 {bookmarkData.length > 0 ? bookmarkData.map((elem, index) => {
@@ -48,7 +75,3 @@ const Navigator = (props) => {
 }
 
 export default React.memo(Navigator)
-
-
-
-

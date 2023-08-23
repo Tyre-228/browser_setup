@@ -117,21 +117,18 @@ html, body {
   animation-timing-function: ease;
   animation-iteration-count: 1;
 }
-.content__morning {
-  background-image: url("https://i.pinimg.com/originals/7b/36/59/7b365916db77a49453cd883b548a9e26.jpg");
-}
-.content__afternoon {
-  background-image: url("https://wallpapercave.com/wp/wp3386778.jpg");
-}
-.content__evening {
-  background-image: url("https://images.hdqwalls.com/download/new-york-city-evening-time-ak-1920x1080.jpg");
-}
-.content__night {
-  background-image: url("https://pure.wallpapergk.com/download/night_city_road_buildings_architecture-2560x1600.jpg");
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
 }
 
-.greet {
+.header__greet {
   margin-bottom: calc(2rem + 4vw);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .greet__title {
@@ -204,6 +201,23 @@ html, body {
     opacity: 1;
     top: 0;
   }
+}
+
+.header__change-background-button {
+  border-radius: 20px;
+  background-color: rgb(112, 112, 112);
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+}
+.header__change-background-button > svg {
+  font-size: 64px;
+  fill: black;
+}
+.header__change-background-button:hover {
+  opacity: 1;
 }
 
 .navigation {
@@ -425,14 +439,6 @@ html, body {
   transition: 400ms all;
   border: 2px solid transparent;
 }
-.bookmark > .delete {
-  position: relative;
-  top: 0;
-  width: 40px;
-  height: 40px;
-  opacity: 0;
-  transition: 400ms all;
-}
 .bookmark:hover {
   position: relative;
   left: 5px;
@@ -444,6 +450,14 @@ html, body {
 }
 .bookmark:hover > .delete {
   opacity: 1;
+  transition: 400ms all;
+}
+.bookmark > .delete {
+  position: relative;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
   transition: 400ms all;
 }
 .bookmark > .link {
@@ -482,7 +496,7 @@ html, body {
   height: 54px;
 }
 
-.content__add-bookmark-page {
+.content__add-bookmark-page, .content__add-section-page {
   position: fixed;
   top: 0;
   left: 0;
@@ -493,7 +507,7 @@ html, body {
   justify-content: center;
   align-items: center;
 }
-.content__add-bookmark-page:before {
+.content__add-bookmark-page:before, .content__add-section-page:before {
   content: "";
   position: absolute;
   top: 0;
@@ -505,7 +519,7 @@ html, body {
   z-index: 998;
 }
 
-.add-bookmark-page__wrapper {
+.add-bookmark-page__wrapper, .add-section-page__wrapper {
   display: flex;
   justify-content: space-between;
   background-color: rgb(112, 112, 112);
@@ -522,35 +536,35 @@ html, body {
   z-index: 999;
 }
 
-.add-bookmark-page__close svg {
+.add-bookmark-page__close svg, .add-section-page__close svg {
   width: 40px;
   height: 40px;
 }
-.add-bookmark-page__close svg path {
+.add-bookmark-page__close svg path, .add-section-page__close svg path {
   color: black;
   transition: 200ms all;
 }
 
-.add-bookmark-page__title {
+.add-bookmark-page__title, .add-section-page__title {
   color: black;
   text-align: center;
 }
 
-.add-bookmark-page__form {
+.add-bookmark-page__form, .add-section-page__form {
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
 }
-.add-bookmark-page__form .input {
+.add-bookmark-page__form .input, .add-section-page__form .input {
   background-color: black;
   padding: 2px 0px 2px 5px;
   border-radius: 5px;
 }
-.add-bookmark-page__form .input:not(:last-child) {
+.add-bookmark-page__form .input:not(:last-child), .add-section-page__form .input:not(:last-child) {
   margin-bottom: 5px;
 }
 
-.add-bookmark-page__button {
+.add-bookmark-page__button, .add-section-page__button {
   background-color: black;
   border-radius: 5px;
   padding: 3px 8px;

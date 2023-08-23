@@ -48,21 +48,17 @@ html, body {
         animation-timing-function: ease;
         animation-iteration-count: 1;
     }
-    &__morning {
-        background-image: url("https://i.pinimg.com/originals/7b/36/59/7b365916db77a49453cd883b548a9e26.jpg");
-    }
-    &__afternoon {
-        background-image: url("https://wallpapercave.com/wp/wp3386778.jpg");
-    }
-    &__evening {
-        background-image: url("https://images.hdqwalls.com/download/new-york-city-evening-time-ak-1920x1080.jpg");
-    }
-    &__night {
-        background-image: url("https://pure.wallpapergk.com/download/night_city_road_buildings_architecture-2560x1600.jpg");
-    }
 }
-.greet {
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+.header__greet {
     margin-bottom: calc(2rem + 4vw);
+    margin-left: auto;
+    margin-right: auto;
 }
 .greet__title {
     padding-top: 40px;
@@ -81,6 +77,24 @@ html, body {
     & > .date__day {
         font-size: calc(0.5rem + 2.5vw);
         @include loadAnimation(Animation_1, 1s, 1);
+    }
+}
+.header__change-background-button {
+    // display: block;
+    // border: 7px solid black;
+    border-radius: 20px;
+    background-color: rgb(112, 112, 112);
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+    & > svg {
+        font-size: 64px;
+        fill: black;
+    }
+    &:hover {
+        opacity: 1;
     }
 }
 
@@ -229,14 +243,6 @@ html, body {
     padding: 10px;
     transition: 400ms all;
     border: 2px solid transparent;
-    & > .delete {
-        position: relative;
-        top: 0;
-        width: 40px;
-        height: 40px;
-        opacity: 0;
-        transition: 400ms all;
-    }
     &:hover {
         position: relative;
         left: 5px;
@@ -249,6 +255,14 @@ html, body {
             opacity: 1;
             transition: 400ms all;
         }
+    }
+    & > .delete {
+        position: relative;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        opacity: 0;
+        transition: 400ms all;
     }
     & > .link {
         width: 100%;
@@ -290,7 +304,7 @@ html, body {
 
 
 
-.content__add-bookmark-page {
+.content__add-bookmark-page, .content__add-section-page {
     position: fixed;
     top: 0;
     left: 0;
@@ -312,7 +326,7 @@ html, body {
         z-index: 998;
     }
 }
-.add-bookmark-page__wrapper {
+.add-bookmark-page__wrapper, .add-section-page__wrapper {
     display: flex;
     justify-content: space-between;
     background-color:rgb(112, 112, 112);
@@ -327,7 +341,7 @@ html, body {
     transform: translate(-50%, -50%);
     z-index: 999;
 }
-.add-bookmark-page__close {
+.add-bookmark-page__close, .add-section-page__close {
     svg {
         width: 40px;
         height: 40px;
@@ -337,11 +351,11 @@ html, body {
         }
     }
 }
-.add-bookmark-page__title {
+.add-bookmark-page__title, .add-section-page__title {
     color: black;
     text-align: center;
 }
-.add-bookmark-page__form {
+.add-bookmark-page__form, .add-section-page__form {
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
@@ -354,12 +368,11 @@ html, body {
         }
     }
 }
-.add-bookmark-page__button {
+.add-bookmark-page__button, .add-section-page__button {
     background-color: black;
     border-radius: 5px;
     padding: 3px 8px;
 }
-
 
 
 
