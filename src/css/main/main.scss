@@ -1,7 +1,12 @@
+//---IMPORTS------------------------------------------------------------------------------------------------------
 @import "../cleaner/cleaner.scss";
 @import "../mixins/mixins.scss";
 @import "../variables/variables.scss";
 //---IMPORTS------------------------------------------------------------------------------------------------------
+
+
+
+//---BASE---------------------------------------------------------------------------------------------------------
 html, body {
     height: 100%;
 }
@@ -18,6 +23,10 @@ html, body {
     flex: 1 1 auto;
 }
 //---BASE---------------------------------------------------------------------------------------------------------
+
+
+
+//---HEADER-------------------------------------------------------------------------------------------------------
 * {
     color: #ECEFF1;
     box-sizing: border-box;
@@ -97,11 +106,11 @@ html, body {
         opacity: 1;
     }
 }
+//---HEADER-------------------------------------------------------------------------------------------------------
 
 
 
-
-
+//---NAVIGATOR--------------------------------------------------------------------------------------------------------
 .navigation {
     width: 80%;
     padding: calc(.2rem + 2vw) calc(.2rem + 3vw);
@@ -113,6 +122,7 @@ html, body {
     border-radius: 20px;
     @include loadAnimation(Animation_1, 1.2s, 1);
 }
+//---search-bar-----------------------------------------------------------------------------------
 .navigation__search-bar {
     width: 100%;
     display: flex;
@@ -156,6 +166,7 @@ html, body {
         transform: scale(1.01);
     }
 }
+//---sections--------------------------------------------------------------------------------------
 .navigation__sections {
     display: flex;
     justify-content: space-between;
@@ -212,6 +223,7 @@ html, body {
 .navigation__add-item {
     padding: 10px 20px;
 }
+//---bookmarks------------------------------------------------------------------------------------
 .bookmark-list {
     display: grid;
     grid-template-columns: repeat(4, minmax(100px, 1fr));
@@ -300,11 +312,12 @@ html, body {
         }
     }
 }
+//---NAVIGATOR--------------------------------------------------------------------------------------------------------
 
 
 
-
-.content__add-bookmark-page, .content__add-section-page {
+//---UIs--------------------------------------------------------------------------------------------------------------
+.content__add-bookmark-page, .content__add-section-page, .change-background {
     position: fixed;
     top: 0;
     left: 0;
@@ -326,7 +339,7 @@ html, body {
         z-index: 998;
     }
 }
-.add-bookmark-page__wrapper, .add-section-page__wrapper {
+.add-bookmark-page__wrapper, .add-section-page__wrapper, .change-background__wrapper {
     display: flex;
     justify-content: space-between;
     background-color:rgb(112, 112, 112);
@@ -341,7 +354,7 @@ html, body {
     transform: translate(-50%, -50%);
     z-index: 999;
 }
-.add-bookmark-page__close, .add-section-page__close {
+.add-bookmark-page__close, .add-section-page__close, .change-background__close {
     svg {
         width: 40px;
         height: 40px;
@@ -351,7 +364,7 @@ html, body {
         }
     }
 }
-.add-bookmark-page__title, .add-section-page__title {
+.add-bookmark-page__title, .add-section-page__title, .change-background__title {
     color: black;
     text-align: center;
 }
@@ -373,18 +386,59 @@ html, body {
     border-radius: 5px;
     padding: 3px 8px;
 }
+.change-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        opacity: 0.3;
+        z-index: 998;
+    }
+}
 
+.change-background__image-list {
+    width: max-content;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    row-gap: 20px;
+    column-gap: 10px;
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+}
+.image-list__item {
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(112, 112, 112);
+    padding: 5px;
+    border-radius: 5px;
+    & > .image {
+        width: fit-content;
+        max-width: 100px;
+        margin-right: 20px;
+    }
+    & > .title {
 
+    }
+    & > .change {
 
-
-
-
-
-
-
-
-
-
+    }
+}
+//---UIs--------------------------------------------------------------------------------------------------------------
 
 
 
@@ -397,3 +451,4 @@ html, body {
         opacity: 0.4;
     }
 }
+//---ANIMATIONS---------------------------------------------------------------------------------------------------

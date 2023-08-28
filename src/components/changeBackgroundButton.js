@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BsFillImageFill } from "react-icons/bs"
+import ManageChangeBackgroundUIContext from "../contexts/manageChangeBackgroundUIContext";
 
 const ChangeBackgroundButton = () => {
+    const manageChangeBackgroundUI = useContext(ManageChangeBackgroundUIContext)
     return (
-        <button className="header__change-background-button change-background-button"><BsFillImageFill/></button>
+        <button onClick={() => {manageChangeBackgroundUI(true)}} className="header__change-background-button change-background-button"><BsFillImageFill/></button>
     )
 }
 

@@ -496,7 +496,7 @@ html, body {
   height: 54px;
 }
 
-.content__add-bookmark-page, .content__add-section-page {
+.content__add-bookmark-page, .content__add-section-page, .change-background {
   position: fixed;
   top: 0;
   left: 0;
@@ -507,7 +507,7 @@ html, body {
   justify-content: center;
   align-items: center;
 }
-.content__add-bookmark-page:before, .content__add-section-page:before {
+.content__add-bookmark-page:before, .content__add-section-page:before, .change-background:before {
   content: "";
   position: absolute;
   top: 0;
@@ -519,7 +519,7 @@ html, body {
   z-index: 998;
 }
 
-.add-bookmark-page__wrapper, .add-section-page__wrapper {
+.add-bookmark-page__wrapper, .add-section-page__wrapper, .change-background__wrapper {
   display: flex;
   justify-content: space-between;
   background-color: rgb(112, 112, 112);
@@ -536,16 +536,16 @@ html, body {
   z-index: 999;
 }
 
-.add-bookmark-page__close svg, .add-section-page__close svg {
+.add-bookmark-page__close svg, .add-section-page__close svg, .change-background__close svg {
   width: 40px;
   height: 40px;
 }
-.add-bookmark-page__close svg path, .add-section-page__close svg path {
+.add-bookmark-page__close svg path, .add-section-page__close svg path, .change-background__close svg path {
   color: black;
   transition: 200ms all;
 }
 
-.add-bookmark-page__title, .add-section-page__title {
+.add-bookmark-page__title, .add-section-page__title, .change-background__title {
   color: black;
   text-align: center;
 }
@@ -570,6 +570,56 @@ html, body {
   padding: 3px 8px;
 }
 
+.change-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.change-background:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.3;
+  z-index: 998;
+}
+
+.change-background__image-list {
+  width: -moz-max-content;
+  width: max-content;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  row-gap: 20px;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+  background-color: black;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.image-list__item {
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(112, 112, 112);
+  padding: 5px;
+  border-radius: 5px;
+}
+.image-list__item > .image {
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 100px;
+  margin-right: 20px;
+}
 @keyframes backgroundAnimation {
   0% {
     opacity: 1;
