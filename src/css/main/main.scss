@@ -74,33 +74,34 @@ html, body {
     margin-bottom: 40px;
     text-align: center;
     font-size: calc(2rem + 2.5vw);
-    @include loadAnimation(Animation_1, 0.5s, 1);
+    @include loadAnimation(Animation_1, 0.3s, 0.7);
 }
 .greet__date {
     text-align: center;
     & > .date__time {
         font-size: calc(1rem + 2.5vw);
         margin-bottom: 10px;
-        @include loadAnimation(Animation_1, 0.8s, 1);
+        @include loadAnimation(Animation_1, 0.6s, 0.7);
     }
     & > .date__day {
         font-size: calc(0.5rem + 2.5vw);
-        @include loadAnimation(Animation_1, 1s, 1);
+        @include loadAnimation(Animation_1, 0.9s, 0.7);
     }
 }
 .header__change-background-button {
-    // display: block;
-    // border: 7px solid black;
+    display: block;
+    border: 7px solid black;
     border-radius: 20px;
     background-color: rgb(112, 112, 112);
     padding: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.4;
+    @include loadAnimation(Animation_1, 0.3s, 0.7);
     & > svg {
         font-size: 64px;
         fill: black;
+        z-index: 1;
     }
     &:hover {
         opacity: 1;
@@ -381,6 +382,12 @@ html, body {
         }
     }
 }
+.change-background__wrapper {
+    width: fit-content;
+}
+.change-background__title {
+    margin-bottom: calc(0.5rem + 1vw);
+}
 .add-bookmark-page__button, .add-section-page__button {
     background-color: black;
     border-radius: 5px;
@@ -408,9 +415,16 @@ html, body {
         z-index: 998;
     }
 }
-
+.change-background__content {
+    width: fit-content;
+    min-width: 80%;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .change-background__image-list {
-    width: max-content;
+    width: fit-content;
     display: grid;
     grid-template-columns: repeat(2, minmax(100px, 1fr));
     row-gap: 20px;
@@ -420,22 +434,49 @@ html, body {
     border-radius: 5px;
 }
 .image-list__item {
-    width: auto;
+    overflow: hidden;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     background-color: rgb(112, 112, 112);
-    padding: 5px;
     border-radius: 5px;
     & > .image {
-        width: fit-content;
-        max-width: 100px;
-        margin-right: 20px;
+        width: 100%;
+        max-width: 200px;
+        margin-bottom: 7%;
     }
     & > .title {
-
+        font-size: 22px;
+        margin-bottom: 10px;
+        text-align: center;
+        text-transform: uppercase;
     }
     & > .change {
-
+        background-color: gray;
+        width: 100%;
+        height: 50px;
+        & > svg {
+            font-size: 30px;
+            transition: 400ms all;
+            transform: rotate(-45deg);
+        }
+        &:hover > svg {
+            transition: 400ms all;
+            fill: rgb(112, 112, 112);
+            transform: rotate(45deg);
+        }
+    }
+}
+@media(max-width: 820px) {
+    .image-list__item > .title {
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+}
+@media(max-width: 680px) {
+    .image-list__item > .title {
+        font-size: 12px;
+        letter-spacing: 1px;
     }
 }
 //---UIs--------------------------------------------------------------------------------------------------------------
