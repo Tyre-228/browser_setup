@@ -7,8 +7,12 @@ import SetImageUI from "./setImageUI";
 const ChangeBackgroundUI = (props) => {
     const imageData = JSON.parse(localStorage.getItem("backgroundImageData"))
     const manageChangeBackgroundUI = useContext(ManageChangeBackgroundUIContext)
+    const [activeState, setActiveState] = useState(props.active)
+    const closeChangeBackgroundUI = () => {
+        setActiveState(false)
+    }
     const changeImageButtonHandler = (id) => {
-        setShownContent(<SetImageUI id={id}/>)
+        setShownContent(<SetImageUI closeChangeBackgroundUI={closeChangeBackgroundUI} id={id}/>)
     }
     const imageList = (
         <div className="change-background__content">
@@ -22,12 +26,13 @@ const ChangeBackgroundUI = (props) => {
     )
     const [shownContent, setShownContent] = useState(imageList)
     useEffect(() => {
+        setActiveState(props.active)
         if(props.active === false) {
             setShownContent(imageList)
         }
     }, [props.active])
     return (
-        <section className="content__change-background change-background" style={{display: `${props.active === true ? "block" : "none"}`}}>
+        <section className="content__change-background change-background" style={{display: `${activeState === true ? "block" : "none"}`}}>
             <div className="change-background__wrapper">
                 {shownContent}
                 <button onClick={() => {manageChangeBackgroundUI(false)}} className="change-background__close"><RxCross1/></button>

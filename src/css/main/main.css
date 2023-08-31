@@ -204,7 +204,6 @@ html, body {
 }
 
 .header__change-background-button {
-  display: block;
   border: 7px solid black;
   border-radius: 20px;
   background-color: rgb(112, 112, 112);
@@ -212,24 +211,6 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  position: relative;
-  animation-name: Animation_1;
-  animation-duration: 1s;
-  animation-iteration-count: 1;
-  animation-delay: 0.3s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-in-out;
-}
-@keyframes Animation_1 {
-  0% {
-    opacity: 0;
-    top: 50px;
-  }
-  100% {
-    opacity: 0.7;
-    top: 0;
-  }
 }
 .header__change-background-button > svg {
   font-size: 64px;
@@ -656,6 +637,7 @@ html, body {
 .image-list__item > .image {
   width: 100%;
   max-width: 200px;
+  height: 45%;
   margin-bottom: 7%;
 }
 .image-list__item > .title {
@@ -672,7 +654,7 @@ html, body {
 .image-list__item > .change > svg {
   font-size: 30px;
   transition: 400ms all;
-  transform: rotate(-45deg);
+  transform: rotate(-45kdeg);
 }
 .image-list__item > .change:hover > svg {
   transition: 400ms all;
@@ -692,6 +674,44 @@ html, body {
     letter-spacing: 1px;
   }
 }
+.set-background {
+  background-color: rgb(26, 26, 26);
+  border-radius: 10px;
+  margin-right: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.set-background__image {
+  margin-bottom: 10px;
+}
+
+.set-background__form {
+  background-color: rgb(69, 69, 69);
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.set-background__form > *:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.set-background__input {
+  background-color: black;
+  font-size: 24px;
+  padding: 2px 2px 3px 5px;
+  border-radius: 4px;
+}
+
+.set-background__submit {
+  background-color: black;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
 @keyframes backgroundAnimation {
   0% {
     opacity: 1;

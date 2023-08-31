@@ -18,17 +18,19 @@ const Navigator = (props) => {
     }
     const deleteSection = (section) => {
         let sectionData = JSON.parse(localStorage.getItem("sectionData"))
-        const sectionIndex = sectionData.findIndex(elem => elem === section)
-        sectionData.splice(sectionIndex, 1)
-        localStorage.setItem("sectionData", JSON.stringify(sectionData))
+        if(sectionData.length > 1) {
+            const sectionIndex = sectionData.findIndex(elem => elem === section)
+            sectionData.splice(sectionIndex, 1)
+            localStorage.setItem("sectionData", JSON.stringify(sectionData))
 
-        setSectionData(sectionData)
-        setCurrentSection(JSON.parse(localStorage.getItem("sectionData"))[0])
-        console.log(JSON.parse(localStorage.getItem("sectionData"))[0])
+            setSectionData(sectionData)
+            setCurrentSection(JSON.parse(localStorage.getItem("sectionData"))[0])
+            console.log(JSON.parse(localStorage.getItem("sectionData"))[0])
 
-        const bookmarkArray = JSON.parse(localStorage.getItem("bookmarkData"))
-        const newBookmarArray = bookmarkArray.filter(elem => elem.section !== section)
-        localStorage.setItem("bookmarkData", JSON.stringify(newBookmarArray))
+            const bookmarkArray = JSON.parse(localStorage.getItem("bookmarkData"))
+            const clearBookmarArray = bookmarkArray.filter(elem => elem.section !== section)
+            localStorage.setItem("bookmarkData", JSON.stringify(clearBookmarArray))
+        }
     }
 
     const bookmarkClickHandler = (event) => {

@@ -9,16 +9,47 @@ import ChangeBackgroundUI from "./components/changeBackgroundUI";
 import AddBookmarkContext from "./contexts/addBookmarkContext";
 import AddSectionContext from "./contexts/addSectionContext";
 import ManageChangeBackgroundUIContext from "./contexts/manageChangeBackgroundUIContext"
+import UpdateBackgroundImageContext from "./contexts/updateBackgroundImageContext";
 import "./css/main/main.css"
 
 function App() {
   const [className, setClassName] = useState("content")
   const [backgroundImage, setBackgroundImage] = useState()
   const [currentSection, setCurrentSection] = useState("")
+  const [updateBackgroundState, setUpdateBackgroundState] = useState(true)
+
   const [addSectionUIState, setAddSectionUIState] = useState(false)
   const [addBookmarkUIState, setAddBookmarkUIState] = useState(false)
   const [changeBackgroundUIState, setChangeBackgroundUIState] = useState(false)
   
+  const localStorageChecker = () => {
+    if(!localStorage.getItem("bookmarkData")) {
+      localStorage.setItem("bookmarkData", JSON.stringify([]))
+    }
+    if(JSON.parse(localStorage.getItem("sectionData")).length < 1) {
+      localStorage.setItem("sectionData", JSON.stringify(["Default"]))
+    }
+    if(JSON.parse(localStorage.getItem("backgroundImageData")).length < 1) {
+      const backgroundImageList = [{
+        id: "morning",
+        link: "https://i.pinimg.com/originals/7b/36/59/7b365916db77a49453cd883b548a9e26.jpg",
+      },
+      {
+        id: "afternoon",
+        link: "https://wallpapercave.com/wp/wp3386778.jpg",
+      },
+      {
+        id: "evening",
+        link: "https://c.wallhere.com/photos/f2/09/futuristic_city_alone_construction_horizon_lights_Sun_clouds_sunset-19811.jpg!d",
+      },
+      {
+        id: "night",
+        link: "https://sm.ign.com/ign_za/news/c/cyberpunk-/cyberpunk-2077-night-city-full-map-seemingly-leaks_zp4v.jpg",
+      }]
+      localStorage.setItem("backgroundImageData", JSON.stringify(backgroundImageList))
+    }
+  }
+  localStorageChecker()
 
   const addBookmarkClickHandler = () => {
     setAddBookmarkUIState(true)
@@ -38,40 +69,15 @@ function App() {
   const manageChangeBackgroundUI = (state) => {
     setChangeBackgroundUIState(state)
   }
+  const manageUpdateBackgroundState = (state) => {
+    setUpdateBackgroundState(state)
+  }
   const getBookmarkData = (currentSection) => {
     let data = JSON.parse(localStorage.getItem("bookmarkData")) || []
     return data.filter(elem => elem.section === currentSection ? true : false)
   }
-  useEffect(() => {
-    if(!localStorage.getItem("bookmarkData")) {
-      localStorage.setItem("bookmarkData", JSON.stringify([]))
-    }
-    if(!localStorage.getItem("sectionData")) {
-      localStorage.setItem("sectionData", JSON.stringify(["Default"]))
-    }
-    if(!localStorage.getItem("backgroundImageData")) {
-      const backgroundImageList = [{
-        id: "morning",
-        link: "https://i.pinimg.com/originals/7b/36/59/7b365916db77a49453cd883b548a9e26.jpg",
-      },
-      {
-        id: "afternoon",
-        link: "https://wallpapercave.com/wp/wp3386778.jpg",
-      },
-      {
-        id: "evening",
-        link: "https://c.wallhere.com/photos/f2/09/futuristic_city_alone_construction_horizon_lights_Sun_clouds_sunset-19811.jpg!d",
-      },
-      {
-        id: "night",
-        link: "https://sm.ign.com/ign_za/news/c/cyberpunk-/cyberpunk-2077-night-city-full-map-seemingly-leaks_zp4v.jpg",
-      }]
-      localStorage.setItem("backgroundImageData", JSON.stringify(backgroundImageList))
-    }
-  }, [])
-
-  useEffect(() => {
-    const hours = (new Date).getHours()
+  const updateBackground = () => {
+    const hours = (new Date()).getHours()
     const backgroundImageList = JSON.parse(localStorage.getItem("backgroundImageData"))
     let backgroundElem
     switch (true) {
@@ -95,19 +101,29 @@ function App() {
         setClassName("content content__night")
         setBackgroundImage(backgroundElem.link)
     }
-  }, [(new Date).getHours()])
+  }
+
+  useEffect(() => {
+    if(updateBackgroundState === true) {
+      updateBackground()
+      setUpdateBackgroundState(false)
+    }
+
+  }, [(new Date()).getHours(), updateBackgroundState])
 
   return (
       <AddSectionContext.Provider value={addSectionClickHandler}>
         <AddBookmarkContext.Provider value={addBookmarkClickHandler}>
           <ManageChangeBackgroundUIContext.Provider value={manageChangeBackgroundUI}>
-            <div className={className} style={{backgroundImage: `url(${backgroundImage})`}}>
-              <AddBookmarkUI closePage={closeAddBookmarkUI} currentSection={currentSection} active={addBookmarkUIState} />
-              <AddSectionUI closePage={closeAddSectionUI} active={addSectionUIState}/>
-              <ChangeBackgroundUI active={changeBackgroundUIState}/>
-              <Header/>
-              <Navigator getBookmarkData={getBookmarkData} getCurrentSection={getCurrentSection} />
-            </div>
+            <UpdateBackgroundImageContext.Provider value={() => {manageUpdateBackgroundState(true)}}>
+              <div className={className} style={{backgroundImage: `url(${backgroundImage})`}}>
+                <AddBookmarkUI closePage={closeAddBookmarkUI} currentSection={currentSection} active={addBookmarkUIState} />
+                <AddSectionUI closePage={closeAddSectionUI} active={addSectionUIState}/>
+                <ChangeBackgroundUI active={changeBackgroundUIState}/>
+                <Header/>
+                <Navigator getBookmarkData={getBookmarkData} getCurrentSection={getCurrentSection} />
+              </div>
+            </UpdateBackgroundImageContext.Provider>
           </ManageChangeBackgroundUIContext.Provider>
         </AddBookmarkContext.Provider>
       </AddSectionContext.Provider>
@@ -115,9 +131,3 @@ function App() {
 }
 
 export default App;
-
-
-
-// date.getHours() >= 6 && date.getHours() < 12 ? "Good morning" : 
-// date.getHours() >= 12 && date.getHours() < 18 ? "Good afternoon" : 
-// date.getHours() >= 18 && date.getHours() < 23 ? "Good evening" :
