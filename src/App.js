@@ -26,10 +26,10 @@ function App() {
     if(!localStorage.getItem("bookmarkData")) {
       localStorage.setItem("bookmarkData", JSON.stringify([]))
     }
-    if(JSON.parse(localStorage.getItem("sectionData")).length < 1) {
+    if(!JSON.parse(localStorage.getItem("sectionData")) || JSON.parse(localStorage.getItem("sectionData")).length < 1) {
       localStorage.setItem("sectionData", JSON.stringify(["Default"]))
     }
-    if(JSON.parse(localStorage.getItem("backgroundImageData")).length < 1) {
+    if(!JSON.parse(localStorage.getItem("backgroundImageData")) || JSON.parse(localStorage.getItem("backgroundImageData")).length < 1) {
       const backgroundImageList = [{
         id: "morning",
         link: "https://i.pinimg.com/originals/7b/36/59/7b365916db77a49453cd883b548a9e26.jpg",

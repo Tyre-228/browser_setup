@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useMemo } from "react";
 import { RxCross1 } from "react-icons/rx"
 import ManageChangeBackgroundUIContext from "../contexts/manageChangeBackgroundUIContext";
 import ImageSection from "./ImageSection";
