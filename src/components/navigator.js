@@ -16,6 +16,11 @@ const Navigator = (props) => {
     const changeCurrentSection = (section) => {
         setCurrentSection(section)
     }
+    const filterBookmarkData = (section) => {
+        const bookmarkData = JSON.parse(localStorage.getItem("bookmarkData"))
+        const filteredBookmarData = bookmarkData.filter(elem => elem.section !== section)
+        localStorage.setItem("bookmarkData", JSON.stringify(filteredBookmarData))
+    }
     const deleteSection = (section) => {
         let sectionData = JSON.parse(localStorage.getItem("sectionData"))
         if(sectionData.length > 1) {
@@ -23,20 +28,19 @@ const Navigator = (props) => {
             sectionData.splice(sectionIndex, 1)
             localStorage.setItem("sectionData", JSON.stringify(sectionData))
 
-            setSectionData(sectionData)
-            setCurrentSection(JSON.parse(localStorage.getItem("sectionData"))[0])
-            console.log(JSON.parse(localStorage.getItem("sectionData"))[0])
-
-            const bookmarkArray = JSON.parse(localStorage.getItem("bookmarkData"))
-            const clearBookmarArray = bookmarkArray.filter(elem => elem.section !== section)
-            localStorage.setItem("bookmarkData", JSON.stringify(clearBookmarArray))
+            filterBookmarkData(section)
+            updateData()
+            if(currentSection === section) {
+                console.log("true")
+                setCurrentSection(sectionData[0])
+            }
         }
     }
 
     const bookmarkClickHandler = (event) => {
-        let data = JSON.parse(localStorage.getItem("bookmarkData"))
-        let elemId = +event.currentTarget.getAttribute("id")
-        let index = data.findIndex(elem => elem.id === elemId)
+        const data = JSON.parse(localStorage.getItem("bookmarkData"))
+        const elemId = +event.currentTarget.getAttribute("id")
+        const index = data.findIndex(elem => elem.id === elemId)
 
         if(index !== -1) {
             data.splice(index, 1)
@@ -49,13 +53,24 @@ const Navigator = (props) => {
         setSectionData(JSON.parse(localStorage.getItem("sectionData")) || ["Default"])
         setCurrentSection(currentSection || JSON.parse(localStorage.getItem("sectionData"))[0] || ["Default"])
         props.getCurrentSection(currentSection)
-        console.log(currentSection)
         setBookmarkData(props.getBookmarkData(currentSection))
     }
     useEffect(() => {
-        console.log(currentSection)
-        updateData()
-    }, [currentSection])
+        if((props.addBookmarkUIState === false) || currentSection) {
+            updateData()
+        }
+    }, [currentSection, props.addBookmarkUIState])
+    useEffect(() => {
+        if(props.addSectionUIState === false) {
+            updateData()
+            const sectionDataVar = JSON.parse(localStorage.getItem("sectionData"))
+            setCurrentSection(sectionDataVar[sectionDataVar.length-1])
+        }
+        // if(props.addBookmarkUIState === false) {
+        //     const sectionData = JSON.parse(localStorage.getItem("sectionData"))
+        //     setCurrentSection(sectionData[0])
+        // }
+    }, [props.addSectionUIState])
 
     return (
         <div className="navigation">

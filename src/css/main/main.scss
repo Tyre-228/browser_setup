@@ -89,26 +89,19 @@ html, body {
     }
 }
 .header__change-background-button {
-    border: 7px solid black;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: rgb(112, 112, 112);
-    padding: 2px;
+    padding: 0px 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    //@include loadAnimation(Animation_1, 0.3s, 0.7);
+    @include loadAnimation(Animation_1, 0.3s, 1);
     & > svg {
         font-size: 64px;
         fill: black;
-        z-index: 1;
-    }
-    &:hover {
-        opacity: 1;
     }
 }
 //---HEADER-------------------------------------------------------------------------------------------------------
-
-
 
 //---NAVIGATOR--------------------------------------------------------------------------------------------------------
 .navigation {

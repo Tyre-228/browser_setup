@@ -121,7 +121,7 @@ function App() {
                 <AddSectionUI closePage={closeAddSectionUI} active={addSectionUIState}/>
                 <ChangeBackgroundUI active={changeBackgroundUIState}/>
                 <Header/>
-                <Navigator getBookmarkData={getBookmarkData} getCurrentSection={getCurrentSection} />
+                <Navigator addSectionUIState={addSectionUIState} addBookmarkUIState={addBookmarkUIState} getBookmarkData={getBookmarkData} getCurrentSection={getCurrentSection} />
               </div>
             </UpdateBackgroundImageContext.Provider>
           </ManageChangeBackgroundUIContext.Provider>

@@ -5,7 +5,9 @@ import ManageChangeBackgroundUIContext from "../contexts/manageChangeBackgroundU
 const ChangeBackgroundButton = () => {
     const manageChangeBackgroundUI = useContext(ManageChangeBackgroundUIContext)
     return (
-        <button onClick={() => {manageChangeBackgroundUI(true)}} className="header__change-background-button change-background-button"><BsFillImageFill/></button>
+        <button onClick={() => {
+            manageChangeBackgroundUI(true)
+        }} className="header__change-background-button change-background-button"><BsFillImageFill/></button>
     )
 }
 

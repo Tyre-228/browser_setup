@@ -17,6 +17,7 @@ const AddBookmarkUI = (props) => {
             const newData = [...JSON.parse(localStorage.getItem("bookmarkData")), inputData]
             localStorage.setItem("bookmarkData", JSON.stringify(newData))
             inputCleaner()
+            props.closePage()
         }
     }
     const inputCleaner = () => {
