@@ -11,7 +11,7 @@ const Bookmark = (props) => {
                     <p className="bookmark__paragraph paragraph">{props.link.match(/https?:\/\/([^/]+)\//)[1]}</p>
                 </div>
             </a>
-            <button onClick={props.clickHandler} id={props.id} className="bookmark__delete delete"><RxCross1/></button>
+            <button onClick={props.deleteHandler} id={props.id} className="bookmark__delete delete"><RxCross1/></button>
         </li>
     )
 }

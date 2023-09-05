@@ -11,10 +11,14 @@ import { BsFillFolderSymlinkFill } from "react-icons/bs";
 const Navigator = (props) => {
     const [bookmarkData, setBookmarkData] = useState([])
     const [sectionData, setSectionData] = useState([])
-    let [currentSection, setCurrentSection] = useState("")
+    const [currentSection, setCurrentSection] = useState("")
 
     const changeCurrentSection = (section) => {
         setCurrentSection(section)
+    }
+    const getBookmarkData = () => {
+        let data = JSON.parse(localStorage.getItem("bookmarkData")) || []
+        return data.filter(elem => elem.section === currentSection ? true : false)
     }
     const filterBookmarkData = (section) => {
         const bookmarkData = JSON.parse(localStorage.getItem("bookmarkData"))
@@ -22,22 +26,27 @@ const Navigator = (props) => {
         localStorage.setItem("bookmarkData", JSON.stringify(filteredBookmarData))
     }
     const deleteSection = (section) => {
-        let sectionData = JSON.parse(localStorage.getItem("sectionData"))
+        //let sectionData = JSON.parse(localStorage.getItem("sectionData"))
         if(sectionData.length > 1) {
             const sectionIndex = sectionData.findIndex(elem => elem === section)
-            sectionData.splice(sectionIndex, 1)
+            setSectionData(sectionData.splice(sectionIndex, 1))
             localStorage.setItem("sectionData", JSON.stringify(sectionData))
 
             filterBookmarkData(section)
-            updateData()
             if(currentSection === section) {
-                console.log("true")
-                setCurrentSection(sectionData[0])
+                console.log(sectionData)
+                setTimeout(() => {
+                    updateData()
+                }, 2000)
+                setCurrentSection(sectionData[0], () => {console.log(currentSection)})
+                alert(currentSection)
+                console.log(sectionData[0])
+                updateData()
             }
         }
     }
 
-    const bookmarkClickHandler = (event) => {
+    const bookmarkDeleteHandler = (event) => {
         const data = JSON.parse(localStorage.getItem("bookmarkData"))
         const elemId = +event.currentTarget.getAttribute("id")
         const index = data.findIndex(elem => elem.id === elemId)
@@ -47,7 +56,7 @@ const Navigator = (props) => {
         }
         localStorage.setItem("bookmarkData", JSON.stringify(data))
 
-        setBookmarkData(props.getBookmarkData(currentSection))
+        setBookmarkData(getBookmarkData(currentSection))
     }
     const updateData = () => {
         setSectionData(JSON.parse(localStorage.getItem("sectionData")) || ["Default"])
@@ -83,7 +92,7 @@ const Navigator = (props) => {
             </ul>
             <ul className="navigation__bookmark-list bookmark-list">
                 {bookmarkData.length > 0 ? bookmarkData.map((elem, index) => {
-                    return (<Bookmark key={index} name={elem.name} clickHandler={bookmarkClickHandler} image={<BsFillFolderSymlinkFill className="bookmark__image"/>} link={elem.link} id={elem.id} />)
+                    return (<Bookmark key={index} name={elem.name} deleteHandler={bookmarkDeleteHandler} image={<BsFillFolderSymlinkFill className="bookmark__image"/>} link={elem.link} id={elem.id} />)
                 }) : ""}
                 <AddBookmark />
             </ul>
