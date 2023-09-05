@@ -483,6 +483,7 @@ html, body {
 }
 .bookmark > .link > .bookmark__text {
   text-align: start;
+  word-break: break-all;
 }
 .bookmark > .link > .bookmark__text > .title {
   text-transform: uppercase;
@@ -492,10 +493,10 @@ html, body {
   color: rgb(69, 69, 69);
 }
 .bookmark .bookmark__image {
-  width: 60px;
-  height: 60px;
-  min-width: 30px;
-  min-height: 30px;
+  max-width: 60px;
+  max-height: 60px;
+  min-width: 60px;
+  min-height: 60px;
   margin-right: 20px;
 }
 .bookmark + .add-item {
