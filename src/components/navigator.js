@@ -26,7 +26,6 @@ const Navigator = (props) => {
         localStorage.setItem("bookmarkData", JSON.stringify(filteredBookmarData))
     }
     const deleteSection = (section) => {
-        //let sectionData = JSON.parse(localStorage.getItem("sectionData"))
         if(sectionData.length > 1) {
             const sectionIndex = sectionData.findIndex(elem => elem === section)
             setSectionData(sectionData.splice(sectionIndex, 1))
@@ -38,9 +37,7 @@ const Navigator = (props) => {
                 setTimeout(() => {
                     updateData()
                 }, 2000)
-                setCurrentSection(sectionData[0], () => {console.log(currentSection)})
-                alert(currentSection)
-                console.log(sectionData[0])
+                setCurrentSection(sectionData[0])
                 updateData()
             }
         }
@@ -75,10 +72,6 @@ const Navigator = (props) => {
             const sectionDataVar = JSON.parse(localStorage.getItem("sectionData"))
             setCurrentSection(sectionDataVar[sectionDataVar.length-1])
         }
-        // if(props.addBookmarkUIState === false) {
-        //     const sectionData = JSON.parse(localStorage.getItem("sectionData"))
-        //     setCurrentSection(sectionData[0])
-        // }
     }, [props.addSectionUIState])
 
     return (

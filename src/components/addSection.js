@@ -8,4 +8,4 @@ const AddSection = () => {
     )
 }
 
-export default AddSection
+export default React.memo(AddSection)
