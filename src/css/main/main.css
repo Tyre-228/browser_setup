@@ -97,6 +97,7 @@ html, body {
 
 .content {
   width: 100%;
+  min-height: 100vh;
   padding: 0px 20px;
   position: relative;
   background-size: cover;
